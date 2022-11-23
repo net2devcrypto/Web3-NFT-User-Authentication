@@ -3,3 +3,4 @@
 
 
 <h2>Part 1: Securing Apps with NFTs</h2>
+Refer to "Part 1" folder attached.
