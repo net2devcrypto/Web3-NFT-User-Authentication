@@ -1,8 +1,29 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { connectWallet } from '../components/web3connect';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export default function Home() {
+  const router = useRouter();
+
+  async function verifyUser() {
+    const output = await connectWallet();
+    // console.log(output);
+    if (output === 0) {
+      router.push("/denied");
+    } else {
+      router.push("/welcome");
+    }
+  }
+
+  useEffect(() => {
+    const checkAuth = setInterval(() => {
+      verifyUser();
+    }, 2000);
+    return () => clearInterval(checkAuth);
+  }, []);
 
   return (
     <div className={styles.container}>
